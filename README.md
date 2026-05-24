@@ -1,5 +1,7 @@
 # Petstore Pact Contract Testing
 
+[![Contract Tests](https://github.com/dmbiel/dmbiel-petstore-pact/actions/workflows/contract-tests.yml/badge.svg)](https://github.com/dmbiel/dmbiel-petstore-pact/actions/workflows/contract-tests.yml)
+
 Consumer-driven contract testing example for Swagger Petstore API using Pact JS and
 TypeScript.
 
