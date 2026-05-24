@@ -1,0 +1,346 @@
+{
+  "consumer": {
+    "name": "PetstoreClient"
+  },
+  "interactions": [
+    {
+      "description": "a request to create a pet",
+      "providerStates": [
+        {
+          "name": "provider accepts new pet creation"
+        }
+      ],
+      "request": {
+        "body": {
+          "category": {
+            "id": 1,
+            "name": "dogs"
+          },
+          "id": 456,
+          "name": "Buddy",
+          "photoUrls": [
+            "https://example.com/buddy.jpg"
+          ],
+          "status": "available",
+          "tags": [
+            {
+              "id": 20,
+              "name": "puppy"
+            }
+          ]
+        },
+        "headers": {
+          "Accept": "application/json",
+          "Content-Type": "application/json"
+        },
+        "matchingRules": {
+          "header": {
+            "Content-Type": {
+              "combine": "AND",
+              "matchers": [
+                {
+                  "match": "regex",
+                  "regex": "^application\\/json(;\\s?charset=[\\w-]+)?$"
+                }
+              ]
+            }
+          }
+        },
+        "method": "POST",
+        "path": "/v2/pet"
+      },
+      "response": {
+        "body": {
+          "category": {
+            "id": 1,
+            "name": "dogs"
+          },
+          "id": 456,
+          "name": "Buddy",
+          "photoUrls": [
+            "https://example.com/buddy.jpg"
+          ],
+          "status": "available",
+          "tags": [
+            {
+              "id": 20,
+              "name": "puppy"
+            }
+          ]
+        },
+        "headers": {
+          "Content-Type": "application/json"
+        },
+        "matchingRules": {
+          "body": {
+            "$": {
+              "combine": "AND",
+              "matchers": [
+                {
+                  "match": "type"
+                }
+              ]
+            }
+          },
+          "header": {
+            "Content-Type": {
+              "combine": "AND",
+              "matchers": [
+                {
+                  "match": "regex",
+                  "regex": "^application\\/json(;\\s?charset=[\\w-]+)?$"
+                }
+              ]
+            }
+          }
+        },
+        "status": 200
+      }
+    },
+    {
+      "description": "a request to find pets by status",
+      "providerStates": [
+        {
+          "name": "available pets exist"
+        }
+      ],
+      "request": {
+        "headers": {
+          "Accept": "application/json"
+        },
+        "method": "GET",
+        "path": "/v2/pet/findByStatus",
+        "query": {
+          "status": [
+            "available"
+          ]
+        }
+      },
+      "response": {
+        "body": [
+          {
+            "id": 123,
+            "name": "Rex",
+            "photoUrls": [
+              "https://example.com/rex.jpg"
+            ],
+            "status": "available"
+          }
+        ],
+        "headers": {
+          "Content-Type": "application/json"
+        },
+        "matchingRules": {
+          "body": {
+            "$": {
+              "combine": "AND",
+              "matchers": [
+                {
+                  "match": "type",
+                  "min": 1
+                }
+              ]
+            },
+            "$[*].id": {
+              "combine": "AND",
+              "matchers": [
+                {
+                  "match": "integer"
+                }
+              ]
+            },
+            "$[*].name": {
+              "combine": "AND",
+              "matchers": [
+                {
+                  "match": "type"
+                }
+              ]
+            },
+            "$[*].photoUrls": {
+              "combine": "AND",
+              "matchers": [
+                {
+                  "match": "type",
+                  "min": 1
+                }
+              ]
+            },
+            "$[*].photoUrls[*]": {
+              "combine": "AND",
+              "matchers": [
+                {
+                  "match": "type"
+                }
+              ]
+            }
+          },
+          "header": {
+            "Content-Type": {
+              "combine": "AND",
+              "matchers": [
+                {
+                  "match": "regex",
+                  "regex": "^application\\/json(;\\s?charset=[\\w-]+)?$"
+                }
+              ]
+            }
+          }
+        },
+        "status": 200
+      }
+    },
+    {
+      "description": "a request to get pet by ID",
+      "providerStates": [
+        {
+          "name": "pet with ID 123 exists"
+        }
+      ],
+      "request": {
+        "headers": {
+          "Accept": "application/json"
+        },
+        "method": "GET",
+        "path": "/v2/pet/123"
+      },
+      "response": {
+        "body": {
+          "category": {
+            "id": 1,
+            "name": "dogs"
+          },
+          "id": 123,
+          "name": "Rex",
+          "photoUrls": [
+            "https://example.com/rex.jpg"
+          ],
+          "status": "available",
+          "tags": [
+            {
+              "id": 10,
+              "name": "friendly"
+            }
+          ]
+        },
+        "headers": {
+          "Content-Type": "application/json"
+        },
+        "matchingRules": {
+          "body": {
+            "$.category.id": {
+              "combine": "AND",
+              "matchers": [
+                {
+                  "match": "integer"
+                }
+              ]
+            },
+            "$.category.name": {
+              "combine": "AND",
+              "matchers": [
+                {
+                  "match": "type"
+                }
+              ]
+            },
+            "$.id": {
+              "combine": "AND",
+              "matchers": [
+                {
+                  "match": "integer"
+                }
+              ]
+            },
+            "$.name": {
+              "combine": "AND",
+              "matchers": [
+                {
+                  "match": "type"
+                }
+              ]
+            },
+            "$.photoUrls": {
+              "combine": "AND",
+              "matchers": [
+                {
+                  "match": "type",
+                  "min": 1
+                }
+              ]
+            },
+            "$.photoUrls[*]": {
+              "combine": "AND",
+              "matchers": [
+                {
+                  "match": "type"
+                }
+              ]
+            },
+            "$.status": {
+              "combine": "AND",
+              "matchers": [
+                {
+                  "match": "regex",
+                  "regex": "available|pending|sold"
+                }
+              ]
+            },
+            "$.tags": {
+              "combine": "AND",
+              "matchers": [
+                {
+                  "match": "type",
+                  "min": 1
+                }
+              ]
+            },
+            "$.tags[*].id": {
+              "combine": "AND",
+              "matchers": [
+                {
+                  "match": "integer"
+                }
+              ]
+            },
+            "$.tags[*].name": {
+              "combine": "AND",
+              "matchers": [
+                {
+                  "match": "type"
+                }
+              ]
+            }
+          },
+          "header": {
+            "Content-Type": {
+              "combine": "AND",
+              "matchers": [
+                {
+                  "match": "regex",
+                  "regex": "^application\\/json(;\\s?charset=[\\w-]+)?$"
+                }
+              ]
+            }
+          }
+        },
+        "status": 200
+      }
+    }
+  ],
+  "metadata": {
+    "pact-js": {
+      "version": "16.5.0"
+    },
+    "pactRust": {
+      "ffi": "0.5.4",
+      "models": "1.3.11"
+    },
+    "pactSpecification": {
+      "version": "3.0.0"
+    }
+  },
+  "provider": {
+    "name": "PetstoreAPI"
+  }
+}
