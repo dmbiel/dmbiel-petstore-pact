@@ -47,6 +47,30 @@ provider is verified against that already generated contract.
 This reduces dependency on slow, expensive, and brittle end-to-end integration tests while still
 protecting service integration quality.
 
+## API Tests vs Contract Tests
+
+| Aspect | API tests | Contract tests |
+| --- | --- | --- |
+| Main question | Does this deployed API behavior work right now? | Can the provider satisfy the consumer's agreed expectations? |
+| Owner of expectations | Usually the test author or API team | The consumer that depends on the provider |
+| Typical target | A running API environment | Pact mock server for consumer tests and provider app for verification |
+| Assertions | Status codes, response values, workflows, side effects | Request/response shape, required headers, provider states, compatible types |
+| Failure signal | The API behavior or environment is currently broken | A consumer/provider integration contract has become incompatible |
+
+This repository is not just a generic API test suite. The consumer tests define the behavior
+`PetstoreClient` needs from `PetstoreAPI`, and Pact writes those expectations into a contract file.
+The provider verification test then checks whether the local provider implementation can satisfy
+that already generated contract.
+
+Pact matchers are used instead of full hard-coded JSON equality. For example, the contract checks
+that `id` is a number, `photoUrls` is an array of strings, and `status` matches
+`available|pending|sold`. This keeps the contract strict about compatibility without making it
+fragile when irrelevant example values change.
+
+This project intentionally does not use the public Petstore API as the CI provider target. The live
+sample API is useful for learning, but CI should verify a deterministic provider fixture rather than
+depend on public demo service availability or mutable remote data.
+
 ## Covered Contracts
 
 | Interaction | Method | Endpoint |
