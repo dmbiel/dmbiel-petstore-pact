@@ -1,0 +1,46 @@
+{
+  "name": "dmbiel-petstore-pact",
+  "version": "1.0.0",
+  "description": "Consumer-driven contract testing example for Swagger Petstore API using Pact JS and TypeScript.",
+  "main": "index.js",
+  "scripts": {
+    "test": "jest",
+    "test:consumer": "jest tests/consumer",
+    "test:provider": "jest tests/provider",
+    "test:contract": "npm run test:consumer && npm run test:provider",
+    "lint": "eslint .",
+    "format": "prettier --write .",
+    "typecheck": "tsc --noEmit",
+    "provider:start": "ts-node src/provider/server.ts"
+  },
+  "keywords": [
+    "contract-testing",
+    "pact",
+    "pact-js",
+    "typescript",
+    "petstore",
+    "qa-automation",
+    "api-testing"
+  ],
+  "author": "Dmytro Bieliaiev",
+  "license": "MIT",
+  "dependencies": {
+    "axios": "latest",
+    "express": "latest"
+  },
+  "devDependencies": {
+    "@eslint/js": "latest",
+    "@pact-foundation/pact": "latest",
+    "@types/express": "latest",
+    "@types/jest": "latest",
+    "@types/node": "latest",
+    "@typescript-eslint/eslint-plugin": "latest",
+    "@typescript-eslint/parser": "latest",
+    "eslint": "latest",
+    "jest": "latest",
+    "prettier": "latest",
+    "ts-jest": "latest",
+    "ts-node": "latest",
+    "typescript": "latest"
+  }
+}
