@@ -67,6 +67,7 @@ protecting service integration quality.
 │   │   └── types.ts
 │   ├── provider/
 │   │   ├── app.ts
+│   │   ├── providerStates.ts
 │   │   ├── server.ts
 │   │   └── testData.ts
 │   └── shared/
@@ -78,6 +79,7 @@ protecting service integration quality.
 
 - `src/consumer` contains the TypeScript API client and Petstore domain types.
 - `src/provider` contains a local Express provider stub used for deterministic verification.
+- `src/provider/providerStates.ts` prepares local provider fixtures for Pact provider states.
 - `src/shared` contains Pact matchers shared by the consumer contract tests.
 - `tests/consumer` generates Pact contracts from consumer expectations.
 - `tests/provider` verifies the local provider against generated Pact files.
@@ -124,6 +126,22 @@ pacts/PetstoreClient-PetstoreAPI.json
 
 The generated contract is intentionally not ignored by Git. For a portfolio repository, keeping the
 contract visible makes the consumer/provider flow easier to inspect.
+
+## Provider State Verification
+
+Each Pact interaction declares the provider state required for that scenario, such as
+`pet with ID 123 exists` or `available pets exist`.
+
+During provider verification, Pact calls a local state setup endpoint before each interaction. This
+project enables that endpoint only in the verification test app:
+
+```text
+/_pact/provider-states
+```
+
+The setup handler resets the Express provider fixture data before verification runs. This keeps the
+provider verification deterministic and makes the provider state lifecycle explicit without exposing
+test-only setup routes from the normal provider server.
 
 ## CI
 
