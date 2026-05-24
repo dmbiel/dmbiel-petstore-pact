@@ -1,6 +1,8 @@
 # Petstore Pact Contract Testing
 
 [![Contract Tests](https://github.com/dmbiel/dmbiel-petstore-pact/actions/workflows/contract-tests.yml/badge.svg)](https://github.com/dmbiel/dmbiel-petstore-pact/actions/workflows/contract-tests.yml)
+![Node.js 22](https://img.shields.io/badge/node.js-22-339933)
+![License: MIT](https://img.shields.io/badge/license-MIT-blue)
 
 Consumer-driven contract testing example for Swagger Petstore API using Pact JS and
 TypeScript.
@@ -13,6 +15,18 @@ relying on full end-to-end environments.
 The project models a small Petstore client that defines expectations for a Petstore API provider.
 Consumer Pact tests generate a contract file, and provider verification checks that a local Express
 provider can satisfy that contract.
+
+## Repository Status
+
+This is a portfolio-ready baseline project focused on the core Pact workflow:
+
+- consumer tests generate a Pact contract;
+- provider verification checks a local provider against that generated contract;
+- CI keeps the flow deterministic without relying on the live Petstore demo API;
+- dependency versions are pinned to keep clean checkouts reproducible.
+
+Pact Broker, PactFlow, Docker, and richer reporting are intentionally left as future improvements
+after the basic consumer/provider contract flow is stable.
 
 ## Tech Stack
 
@@ -112,6 +126,8 @@ depend on public demo service availability or mutable remote data.
 - `pacts` stores generated contract artifacts for review and CI upload.
 
 ## How to Install
+
+Use Node.js 22 to match the GitHub Actions runtime.
 
 ```bash
 npm install
