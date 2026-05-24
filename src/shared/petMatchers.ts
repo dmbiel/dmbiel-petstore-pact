@@ -1,4 +1,4 @@
-import { MatchersV3 } from '@pact-foundation/pact';
+import { MatchersV3 } from '@pact-foundation/pact/src/v3';
 import { CreatePetRequest } from '../consumer/types';
 
 const { eachLike, integer, like, regex, string } = MatchersV3;

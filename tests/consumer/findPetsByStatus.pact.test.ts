@@ -1,5 +1,5 @@
 import path from 'path';
-import { PactV3 } from '@pact-foundation/pact';
+import { PactV3 } from '@pact-foundation/pact/src/v3';
 import { PetstoreClient } from '../../src/consumer/petstoreClient';
 import { jsonContentTypeHeader, petArrayResponseMatcher } from '../../src/shared/petMatchers';
 

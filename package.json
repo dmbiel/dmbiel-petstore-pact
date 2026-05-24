@@ -5,8 +5,8 @@
   "main": "index.js",
   "scripts": {
     "test": "jest",
-    "test:consumer": "jest tests/consumer",
-    "test:provider": "jest tests/provider",
+    "test:consumer": "jest tests/consumer --runInBand",
+    "test:provider": "jest tests/provider --runInBand",
     "test:contract": "npm run test:consumer && npm run test:provider",
     "lint": "eslint .",
     "format": "prettier --write .",

@@ -1,7 +1,7 @@
 import { Server } from 'http';
 import { AddressInfo } from 'net';
 import path from 'path';
-import { Verifier } from '@pact-foundation/pact';
+import { Verifier } from '@pact-foundation/pact-core';
 import { createProviderApp } from '../../src/provider/app';
 
 describe('Pact provider verification: Petstore API', () => {
@@ -27,13 +27,9 @@ describe('Pact provider verification: Petstore API', () => {
       provider: 'PetstoreAPI',
       providerBaseUrl,
       pactUrls: [path.resolve(process.cwd(), 'pacts', 'PetstoreClient-PetstoreAPI.json')],
-      stateHandlers: {
-        'pet with ID 123 exists': async () => Promise.resolve(),
-        'available pets exist': async () => Promise.resolve(),
-        'provider accepts new pet creation': async () => Promise.resolve()
-      }
+      logLevel: 'info'
     });
 
-    await verifier.verifyProvider();
+    await verifier.verify();
   });
 });
