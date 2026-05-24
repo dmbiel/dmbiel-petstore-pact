@@ -1,5 +1,7 @@
 # Petstore Pact Contract Testing
 
+[![Contract Tests](https://github.com/dmbiel/dmbiel-petstore-pact/actions/workflows/contract-tests.yml/badge.svg)](https://github.com/dmbiel/dmbiel-petstore-pact/actions/workflows/contract-tests.yml)
+
 Consumer-driven contract testing example for Swagger Petstore API using Pact JS and
 TypeScript.
 
@@ -167,15 +169,22 @@ The setup handler resets the Express provider fixture data before verification r
 provider verification deterministic and makes the provider state lifecycle explicit without exposing
 test-only setup routes from the normal provider server.
 
-## CI
+## CI Contract Pipeline
 
-GitHub Actions runs:
+GitHub Actions models the same consumer-driven flow used locally, but splits it into focused jobs:
 
-- TypeScript check
-- ESLint
-- Consumer Pact tests
-- Provider Pact verification
-- Pact artifact upload
+| Job | Purpose |
+| --- | --- |
+| `quality` | Runs TypeScript type checking and ESLint. |
+| `consumer-contracts` | Runs consumer Pact tests and uploads the generated contract from `pacts/`. |
+| `provider-verification` | Downloads the Pact artifact and verifies the local provider against it. |
+
+The provider verification job depends on both `quality` and `consumer-contracts`. This makes the CI
+relationship explicit: provider compatibility is checked against the contract produced by consumer
+tests, not against assumptions duplicated in the provider test.
+
+The pipeline uploads the generated Pact contract as a GitHub Actions artifact so the contract can be
+inspected after the run.
 
 ## Why Local Provider Instead of Live Petstore?
 
