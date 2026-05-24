@@ -1,6 +1,6 @@
 import { Pet } from '../consumer/types';
 
-export const pets: Pet[] = [
+const initialPets: Pet[] = [
   {
     id: 123,
     category: {
@@ -18,3 +18,18 @@ export const pets: Pet[] = [
     status: 'available'
   }
 ];
+
+function clonePet(pet: Pet): Pet {
+  return {
+    ...pet,
+    category: pet.category ? { ...pet.category } : undefined,
+    photoUrls: [...pet.photoUrls],
+    tags: pet.tags?.map((tag) => ({ ...tag }))
+  };
+}
+
+export const pets: Pet[] = initialPets.map(clonePet);
+
+export function resetPets(): void {
+  pets.splice(0, pets.length, ...initialPets.map(clonePet));
+}

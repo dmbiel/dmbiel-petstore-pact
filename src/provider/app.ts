@@ -1,11 +1,30 @@
 import express from 'express';
 import { Pet } from '../consumer/types';
 import { pets } from './testData';
+import { PactProviderStateChangeRequest, setupProviderStates } from './providerStates';
 
-export function createProviderApp() {
+export interface ProviderAppOptions {
+  enablePactStateSetup?: boolean;
+}
+
+export function createProviderApp(options: ProviderAppOptions = {}) {
   const app = express();
 
   app.use(express.json());
+
+  if (options.enablePactStateSetup) {
+    app.all('/_pact/provider-states', (req, res) => {
+      try {
+        const states = setupProviderStates(req.body as PactProviderStateChangeRequest);
+
+        return res.status(200).json({ states });
+      } catch (error) {
+        const message = error instanceof Error ? error.message : 'Provider state setup failed';
+
+        return res.status(400).json({ message });
+      }
+    });
+  }
 
   app.get('/v2/pet/findByStatus', (req, res) => {
     const status = req.query.status;
