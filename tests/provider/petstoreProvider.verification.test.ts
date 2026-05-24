@@ -7,13 +7,15 @@ import { createProviderApp } from '../../src/provider/app';
 describe('Pact provider verification: Petstore API', () => {
   let server: Server;
   let providerBaseUrl: string;
+  let providerStatesSetupUrl: string;
 
   beforeAll((done) => {
-    const app = createProviderApp();
+    const app = createProviderApp({ enablePactStateSetup: true });
 
     server = app.listen(0, () => {
       const address = server.address() as AddressInfo;
       providerBaseUrl = `http://127.0.0.1:${address.port}`;
+      providerStatesSetupUrl = `${providerBaseUrl}/_pact/provider-states`;
       done();
     });
   });
@@ -26,6 +28,7 @@ describe('Pact provider verification: Petstore API', () => {
     const verifier = new Verifier({
       provider: 'PetstoreAPI',
       providerBaseUrl,
+      providerStatesSetupUrl,
       pactUrls: [path.resolve(process.cwd(), 'pacts', 'PetstoreClient-PetstoreAPI.json')],
       logLevel: 'info'
     });
