@@ -67,10 +67,9 @@ separate branches and pull requests.
 4. Add CI matrix for Node.js LTS versions.
 5. Add scheduled CI run to detect dependency/runtime issues.
 6. Add status badges for typecheck, lint, consumer contracts, and provider verification if split into separate workflows.
-7. Add PR template with contract testing checklist.
-8. Add issue templates for contract changes and provider verification failures.
-9. Add required checks documentation.
-10. Add release workflow for tagged portfolio versions.
+7. Add issue templates for contract changes and provider verification failures.
+8. Add required checks documentation.
+9. Add release workflow for tagged portfolio versions.
 
 ## Developer Experience
 
@@ -83,7 +82,6 @@ separate branches and pull requests.
 7. Add `lint-staged` and `husky` pre-commit hooks.
 8. Add clearer troubleshooting docs for Pact native binaries.
 9. Add troubleshooting docs for Windows-specific Pact issues.
-10. Add `CONTRIBUTING.md`.
 
 ## Test Reporting
 
@@ -115,12 +113,11 @@ separate branches and pull requests.
 2. Add `docs/api-tests-vs-contract-tests.md` if the README section needs more depth.
 3. Add `docs/provider-states.md`.
 4. Add `docs/ci-pipeline.md`.
-5. Add `docs/pact-matchers.md`.
-6. Add `docs/troubleshooting.md`.
-7. Add diagrams for consumer/provider flow.
-8. Add PR-by-PR development history.
-9. Add a "How to review this portfolio project" section.
-10. Add a "What this project intentionally does not cover" section.
+5. Add `docs/troubleshooting.md`.
+6. Add diagrams for consumer/provider flow.
+7. Add PR-by-PR development history.
+8. Add a "How to review this portfolio project" section.
+9. Add a "What this project intentionally does not cover" section.
 
 ## Portfolio Polish
 
@@ -155,9 +152,9 @@ portfolio version until the core contract testing flow is already stable.
 
 The most useful next improvements after the current version are:
 
-1. Add `CONTRIBUTING.md`.
-2. Add a pull request template with a contract testing checklist.
-3. Add `docs/pact-matchers.md`.
+1. Add `docs/provider-states.md`.
+2. Add `docs/troubleshooting.md`.
+3. Add a consumer/provider flow diagram.
 
 These improvements increase portfolio maturity without expanding the project
 scope too quickly.
