@@ -80,8 +80,6 @@ separate branches and pull requests.
 5. Add VS Code tasks for consumer/provider contract tests.
 6. Add `.editorconfig`.
 7. Add `lint-staged` and `husky` pre-commit hooks.
-8. Add clearer troubleshooting docs for Pact native binaries.
-9. Add troubleshooting docs for Windows-specific Pact issues.
 
 ## Test Reporting
 
@@ -111,13 +109,10 @@ separate branches and pull requests.
 
 1. Add `docs/contract-testing-basics.md`.
 2. Add `docs/api-tests-vs-contract-tests.md` if the README section needs more depth.
-3. Add `docs/provider-states.md`.
-4. Add `docs/ci-pipeline.md`.
-5. Add `docs/troubleshooting.md`.
-6. Add diagrams for consumer/provider flow.
-7. Add PR-by-PR development history.
-8. Add a "How to review this portfolio project" section.
-9. Add a "What this project intentionally does not cover" section.
+3. Add `docs/ci-pipeline.md`.
+4. Add PR-by-PR development history.
+5. Add a "How to review this portfolio project" section.
+6. Add a "What this project intentionally does not cover" section.
 
 ## Portfolio Polish
 
@@ -152,9 +147,9 @@ portfolio version until the core contract testing flow is already stable.
 
 The most useful next improvements after the current version are:
 
-1. Add `docs/provider-states.md`.
-2. Add `docs/troubleshooting.md`.
-3. Add a consumer/provider flow diagram.
+1. Add `docs/contract-testing-basics.md`.
+2. Add `docs/ci-pipeline.md`.
+3. Add PR-by-PR development history.
 
 These improvements increase portfolio maturity without expanding the project
 scope too quickly.
