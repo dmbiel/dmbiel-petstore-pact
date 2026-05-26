@@ -101,6 +101,7 @@ depend on public demo service availability or mutable remote data.
 .
 ├── .github/workflows/contract-tests.yml
 ├── docs/
+│   ├── contract-testing-basics.md
 │   ├── consumer-provider-flow.md
 │   ├── future-improvements.md
 │   ├── pact-matchers.md
@@ -135,6 +136,7 @@ depend on public demo service availability or mutable remote data.
 
 ## Additional Documentation
 
+- [Contract Testing Basics](docs/contract-testing-basics.md)
 - [Consumer and Provider Flow](docs/consumer-provider-flow.md)
 - [Pact Matchers](docs/pact-matchers.md)
 - [Provider States](docs/provider-states.md)

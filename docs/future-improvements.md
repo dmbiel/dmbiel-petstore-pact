@@ -107,12 +107,11 @@ separate branches and pull requests.
 
 ## Documentation
 
-1. Add `docs/contract-testing-basics.md`.
-2. Add `docs/api-tests-vs-contract-tests.md` if the README section needs more depth.
-3. Add `docs/ci-pipeline.md`.
-4. Add PR-by-PR development history.
-5. Add a "How to review this portfolio project" section.
-6. Add a "What this project intentionally does not cover" section.
+1. Add `docs/api-tests-vs-contract-tests.md` if the README section needs more depth.
+2. Add `docs/ci-pipeline.md`.
+3. Add PR-by-PR development history.
+4. Add a "How to review this portfolio project" section.
+5. Add a "What this project intentionally does not cover" section.
 
 ## Portfolio Polish
 
@@ -147,9 +146,9 @@ portfolio version until the core contract testing flow is already stable.
 
 The most useful next improvements after the current version are:
 
-1. Add `docs/contract-testing-basics.md`.
-2. Add `docs/ci-pipeline.md`.
-3. Add PR-by-PR development history.
+1. Add `docs/ci-pipeline.md`.
+2. Add PR-by-PR development history.
+3. Add a "How to review this portfolio project" section.
 
 These improvements increase portfolio maturity without expanding the project
 scope too quickly.
