@@ -65,13 +65,13 @@ protecting service integration quality.
 
 ## API Tests vs Contract Tests
 
-| Aspect | API tests | Contract tests |
-| --- | --- | --- |
-| Main question | Does this deployed API behavior work right now? | Can the provider satisfy the consumer's agreed expectations? |
-| Owner of expectations | Usually the test author or API team | The consumer that depends on the provider |
-| Typical target | A running API environment | Pact mock server for consumer tests and provider app for verification |
-| Assertions | Status codes, response values, workflows, side effects | Request/response shape, required headers, provider states, compatible types |
-| Failure signal | The API behavior or environment is currently broken | A consumer/provider integration contract has become incompatible |
+| Aspect                | API tests                                              | Contract tests                                                              |
+| --------------------- | ------------------------------------------------------ | --------------------------------------------------------------------------- |
+| Main question         | Does this deployed API behavior work right now?        | Can the provider satisfy the consumer's agreed expectations?                |
+| Owner of expectations | Usually the test author or API team                    | The consumer that depends on the provider                                   |
+| Typical target        | A running API environment                              | Pact mock server for consumer tests and provider app for verification       |
+| Assertions            | Status codes, response values, workflows, side effects | Request/response shape, required headers, provider states, compatible types |
+| Failure signal        | The API behavior or environment is currently broken    | A consumer/provider integration contract has become incompatible            |
 
 This repository is not just a generic API test suite. The consumer tests define the behavior
 `PetstoreClient` needs from `PetstoreAPI`, and Pact writes those expectations into a contract file.
@@ -89,17 +89,23 @@ depend on public demo service availability or mutable remote data.
 
 ## Covered Contracts
 
-| Interaction | Method | Endpoint |
-| --- | ---: | --- |
-| Get pet by ID | GET | `/v2/pet/{petId}` |
-| Find pets by status | GET | `/v2/pet/findByStatus` |
-| Create pet | POST | `/v2/pet` |
+| Interaction         | Method | Endpoint               |
+| ------------------- | -----: | ---------------------- |
+| Get pet by ID       |    GET | `/v2/pet/{petId}`      |
+| Find pets by status |    GET | `/v2/pet/findByStatus` |
+| Create pet          |   POST | `/v2/pet`              |
 
 ## Project Structure
 
 ```text
 .
 ├── .github/workflows/contract-tests.yml
+├── docs/
+│   ├── consumer-provider-flow.md
+│   ├── future-improvements.md
+│   ├── pact-matchers.md
+│   ├── provider-states.md
+│   └── troubleshooting.md
 ├── pacts/
 ├── src/
 │   ├── consumer/
@@ -117,6 +123,8 @@ depend on public demo service availability or mutable remote data.
     └── provider/
 ```
 
+- `docs` contains deeper explanations for the contract testing flow, Pact matchers, provider states,
+  troubleshooting, and future improvements.
 - `src/consumer` contains the TypeScript API client and Petstore domain types.
 - `src/provider` contains a local Express provider stub used for deterministic verification.
 - `src/provider/providerStates.ts` prepares local provider fixtures for Pact provider states.
@@ -124,6 +132,14 @@ depend on public demo service availability or mutable remote data.
 - `tests/consumer` generates Pact contracts from consumer expectations.
 - `tests/provider` verifies the local provider against generated Pact files.
 - `pacts` stores generated contract artifacts for review and CI upload.
+
+## Additional Documentation
+
+- [Consumer and Provider Flow](docs/consumer-provider-flow.md)
+- [Pact Matchers](docs/pact-matchers.md)
+- [Provider States](docs/provider-states.md)
+- [Troubleshooting](docs/troubleshooting.md)
+- [Future Improvements](docs/future-improvements.md)
 
 ## How to Install
 
@@ -189,11 +205,11 @@ test-only setup routes from the normal provider server.
 
 GitHub Actions models the same consumer-driven flow used locally, but splits it into focused jobs:
 
-| Job | Purpose |
-| --- | --- |
-| `quality` | Runs TypeScript type checking and ESLint. |
-| `consumer-contracts` | Runs consumer Pact tests and uploads the generated contract from `pacts/`. |
-| `provider-verification` | Downloads the Pact artifact and verifies the local provider against it. |
+| Job                     | Purpose                                                                    |
+| ----------------------- | -------------------------------------------------------------------------- |
+| `quality`               | Runs TypeScript type checking and ESLint.                                  |
+| `consumer-contracts`    | Runs consumer Pact tests and uploads the generated contract from `pacts/`. |
+| `provider-verification` | Downloads the Pact artifact and verifies the local provider against it.    |
 
 The provider verification job depends on both `quality` and `consumer-contracts`. This makes the CI
 relationship explicit: provider compatibility is checked against the contract produced by consumer
